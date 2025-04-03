@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            background-color: #f4f4f4;
+            color: #194f60;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #fcb900;
+	    font-size: 50px;
+            text-align: center;
+	    font-weight: 100;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 25%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #194f60;
+            border-radius: 4px;
+	    color: #194f60;
+        }
+        button {
+            background-color: #194f60;
+            color: #194f60;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #194f60;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results p {
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        function calculateFootage() {
+            // Get input values
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            const grossWeight = parseFloat(document.getElementById('grossWeight').value);
+            const spoolTare = parseFloat(document.getElementById('spoolTare').value);
+            const bagBandWeight = parseFloat(document.getElementById('bagBandWeight').value);
+            const metalValue = parseFloat(document.getElementById('metal').value);
+
+            // Calculate Net Weight
+            const netWeight = grossWeight - spoolTare - bagBandWeight;
+            document.getElementById('netWeight').innerText = netWeight.toFixed(5);
+
+            // Calculate Measured Volume
+            const measuredVolume = netWeight / metalValue;
+
+            // Calculate Radius
+            const radius = diameter / 2;
+
+            // Calculate Height (Calculated Footage)
+            const calculatedFootage = (measuredVolume / (3.14159 * (radius * radius)))/12;
+            document.getElementById('calculatedFootage').innerText = calculatedFootage.toFixed(0);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Footage Calculator</h1>
+        <label for="diameter">Diameter in Inches:</label>
+        <input type="number" id="diameter" name="diameter" oninput="calculateFootage()"><br><br>
+
+        <label for="grossWeight">Gross Weight:</label>
+        <input type="number" id="grossWeight" name="grossWeight" oninput="calculateFootage()"><br><br>
+
+        <label for="spoolTare">Spool Tare:</label>
+        <input type="number" id="spoolTare" name="spoolTare" oninput="calculateFootage()"><br><br>
+
+        <label for="bagBandWeight">Bag/Band Weight:</label>
+        <input type="number" id="bagBandWeight" name="bagBandWeight" value="0" oninput="calculateFootage()"><br><br>
+
+        <label for="metal">Material:</label>
+        <select id="metal" name="metal" oninput="calculateFootage()">
+            <option value="0.286">304V</option>
+            <option value="0.233021">Nitinol</option>
+            <option value="0.3217">Silver Plated Copper</option>
+            <option value="0.324">Copper</option>
+            <option value="0.30476">NiCra</option>
+        </select><br><br>
+
+        <div class="results">
+            <h2>Results:</h2>
+            <p>Calculated Footage: <span id="calculatedFootage"></span></p>
+            <p><small>Net Weight: <span id="netWeight"></span></small></p>
+        </div>
+    </div>
+</body>
+</html>
