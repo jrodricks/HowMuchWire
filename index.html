@@ -3,113 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footage Calculator</title>
+    <title>Wire Length Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-
-            background-color: #f4f4f4;
-            color: #194f60;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
         h1 {
-            color: #fcb900;
-	    font-size: 50px;
             text-align: center;
-	    font-weight: 100;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 300;
         }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 1.1em;
         }
+
         input, select {
-            width: 25%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #194f60;
-            border-radius: 4px;
-	    color: #194f60;
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
         }
-        button {
-            background-color: #194f60;
-            color: #194f60;
-            padding: 10px 20px;
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        button:hover {
-            background-color: #194f60;
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
         }
-        .results {
-            margin-top: 20px;
+
+        .calculate-btn:active {
+            transform: translateY(-1px);
         }
-        .results p {
-            font-size: 1.2em;
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.5em;
+            color: black;
+            font-weight: bold;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wire-specs {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
         }
     </style>
-    <script>
-        function calculateFootage() {
-            // Get input values
-            const diameter = parseFloat(document.getElementById('diameter').value);
-            const grossWeight = parseFloat(document.getElementById('grossWeight').value);
-            const spoolTare = parseFloat(document.getElementById('spoolTare').value);
-            const bagBandWeight = parseFloat(document.getElementById('bagBandWeight').value);
-            const metalValue = parseFloat(document.getElementById('metal').value);
-
-            // Calculate Net Weight
-            const netWeight = grossWeight - spoolTare - bagBandWeight;
-            document.getElementById('netWeight').innerText = netWeight.toFixed(5);
-
-            // Calculate Measured Volume
-            const measuredVolume = netWeight / metalValue;
-
-            // Calculate Radius
-            const radius = diameter / 2;
-
-            // Calculate Height (Calculated Footage)
-            const calculatedFootage = (measuredVolume / (3.14159 * (radius * radius)))/12;
-            document.getElementById('calculatedFootage').innerText = calculatedFootage.toFixed(0);
-        }
-    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Footage Calculator</h1>
-        <label for="diameter">Diameter in Inches:</label>
-        <input type="number" id="diameter" name="diameter" oninput="calculateFootage()"><br><br>
+        <h1>Wire Length Calculator</h1>
+        
+        <form id="wireForm">
+            <div class="form-group">
+                <label for="totalWeight">Total Spool Weight (pounds):</label>
+                <input type="number" id="totalWeight" step="0.01" required>
+            </div>
 
-        <label for="grossWeight">Gross Weight:</label>
-        <input type="number" id="grossWeight" name="grossWeight" oninput="calculateFootage()"><br><br>
+            <div class="form-group">
+                <label for="spoolWeight">Spool Tare Weight (pounds):</label>
+                <input type="number" id="spoolWeight" step="0.01" required>
+            </div>
 
-        <label for="spoolTare">Spool Tare:</label>
-        <input type="number" id="spoolTare" name="spoolTare" oninput="calculateFootage()"><br><br>
+            <div class="form-group">
+                <label for="boxWeight">Box Weight (pounds):</label>
+                <input type="number" id="boxWeight" step="0.01" value="0">
+            </div>
 
-        <label for="bagBandWeight">Bag/Band Weight:</label>
-        <input type="number" id="bagBandWeight" name="bagBandWeight" value="0" oninput="calculateFootage()"><br><br>
+            <div class="form-group">
+                <label for="bagWeight">Bag Weight (pounds):</label>
+                <input type="number" id="bagWeight" step="0.01" value="0">
+            </div>
 
-        <label for="metal">Material:</label>
-        <select id="metal" name="metal" oninput="calculateFootage()">
-            <option value="0.286">304V</option>
-            <option value="0.233021">Nitinol</option>
-            <option value="0.3217">Silver Plated Copper</option>
-            <option value="0.324">Copper</option>
-            <option value="0.30476">NiCra</option>
-        </select><br><br>
+            <div class="form-group">
+                <label for="material">Wire Material:</label>
+                <select id="material" required>
+                    <option value="">Select Material</option>
+                    <option value="304v">304V</option>
+                    <option value="nitinol">Nitinol</option>
+                    <option value="silver_plated_copper">Silver Plated Copper</option>
+                    <option value="nicra">NiCra</option>
+                </select>
+            </div>
 
-        <div class="results">
-            <h2>Results:</h2>
-            <p>Calculated Footage: <span id="calculatedFootage"></span></p>
-            <p><small>Net Weight: <span id="netWeight"></span></small></p>
-        </div>
+            <div class="form-group">
+                <label for="diameter">Wire Diameter (inches):</label>
+                <input type="number" id="diameter" step="0.0001" placeholder="e.g., 0.010" required>
+            </div>
+
+            <button type="button" class="calculate-btn" onclick="calculateWireLength()">Calculate Length</button>
+        </form>
+
+        <div id="result" class="result"></div>
     </div>
+
+    <script>
+        // Material densities in pounds per cubic inch
+        const materialDensities = {
+            '304v': 0.286,
+            'nitinol': 0.233021,
+            'silver_plated_copper': 0.321815,
+            'nicra': 0.30476
+        };
+
+        function calculateWireLength() {
+            const totalWeight = parseFloat(document.getElementById('totalWeight').value);
+            const spoolWeight = parseFloat(document.getElementById('spoolWeight').value);
+            const boxWeight = parseFloat(document.getElementById('boxWeight').value) || 0;
+            const bagWeight = parseFloat(document.getElementById('bagWeight').value) || 0;
+            const material = document.getElementById('material').value;
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            
+            const resultDiv = document.getElementById('result');
+            
+            // Clear previous result
+            resultDiv.innerHTML = '';
+            
+            // Validate inputs
+            if (!totalWeight || !spoolWeight || !material || !diameter) {
+                resultDiv.innerHTML = 'Please fill in all required fields';
+                return;
+            }
+            
+            const totalTareWeight = spoolWeight + boxWeight + bagWeight;
+            
+            if (totalWeight <= totalTareWeight) {
+                resultDiv.innerHTML = 'Total weight must be greater than combined tare weights';
+                return;
+            }
+            
+            if (diameter <= 0) {
+                resultDiv.innerHTML = 'Diameter must be greater than 0';
+                return;
+            }
+            
+            // Calculate net wire weight in pounds
+            const wireWeight = totalWeight - totalTareWeight;
+            
+            // Get material density (lbs/cubic inch)
+            const density = materialDensities[material];
+            
+            // Calculate wire cross-sectional area (square inches)
+            const radius = diameter / 2;
+            const crossSectionalArea = Math.PI * radius * radius;
+            
+            // Calculate volume of wire (cubic inches)
+            const wireVolume = wireWeight / density;
+            
+            // Calculate length (inches)
+            const lengthInches = wireVolume / crossSectionalArea;
+            
+            // Convert to feet and round to nearest whole number
+            const lengthFeet = Math.round(lengthInches / 12);
+            
+            // Display result
+            resultDiv.innerHTML = lengthFeet + ' feet';
+        }
+    </script>
 </body>
 </html>
