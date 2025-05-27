@@ -139,22 +139,22 @@
         <form id="wireForm">
             <div class="form-group">
                 <label for="totalWeight">Total Spool Weight (pounds):</label>
-                <input type="number" id="totalWeight" step="0.01" required>
+                <input type="number" id="totalWeight" step="0.01" pattern="[0-9]*" required>
             </div>
 
             <div class="form-group">
                 <label for="spoolWeight">Spool Tare Weight (pounds):</label>
-                <input type="number" id="spoolWeight" step="0.01" required>
+                <input type="number" id="spoolWeight" step="0.01" pattern="[0-9]*" required>
             </div>
 
             <div class="form-group">
                 <label for="boxWeight">Box Weight (pounds):</label>
-                <input type="number" id="boxWeight" step="0.01" value="0">
+                <input type="number" id="boxWeight" step="0.01" pattern="[0-9]*" value="0">
             </div>
 
             <div class="form-group">
                 <label for="bagWeight">Bag Weight (pounds):</label>
-                <input type="number" id="bagWeight" step="0.01" value="0">
+                <input type="number" id="bagWeight" step="0.01" pattern="[0-9]*" value="0">
             </div>
 
             <div class="form-group">
@@ -170,7 +170,7 @@
 
             <div class="form-group">
                 <label for="diameter">Wire Diameter (inches):</label>
-                <input type="number" id="diameter" step="0.0001" placeholder="e.g., 0.010" required>
+                <input type="number" id="diameter" step="0.0001" pattern="[0-9]*" placeholder="e.g., 0.010" required>
             </div>
 
             <button type="button" class="calculate-btn" onclick="calculateWireLength()">Calculate Length</button>
