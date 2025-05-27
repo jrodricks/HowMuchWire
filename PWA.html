@@ -153,16 +153,6 @@
             </div>
 
             <div class="form-group">
-                <label for="boxWeight">Box Weight (pounds):</label>
-                <input type="number" id="boxWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" value="0">
-            </div>
-
-            <div class="form-group">
-                <label for="bagWeight">Bag Weight (pounds):</label>
-                <input type="number" id="bagWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" value="0">
-            </div>
-
-            <div class="form-group">
                 <label for="material">Wire Material:</label>
                 <select id="material" required>
                     <option value="">Select Material</option>
@@ -232,8 +222,6 @@
         function calculateWireLength() {
             const totalWeight = parseFloat(document.getElementById('totalWeight').value);
             const spoolWeight = parseFloat(document.getElementById('spoolWeight').value);
-            const boxWeight = parseFloat(document.getElementById('boxWeight').value) || 0;
-            const bagWeight = parseFloat(document.getElementById('bagWeight').value) || 0;
             const material = document.getElementById('material').value;
             const diameter = parseFloat(document.getElementById('diameter').value);
             
@@ -248,10 +236,8 @@
                 return;
             }
             
-            const totalTareWeight = spoolWeight + boxWeight + bagWeight;
-            
-            if (totalWeight <= totalTareWeight) {
-                resultDiv.innerHTML = 'Total weight must be greater than combined tare weights';
+            if (totalWeight <= spoolWeight) {
+                resultDiv.innerHTML = 'Total weight must be greater than spool weight';
                 return;
             }
             
@@ -261,7 +247,7 @@
             }
             
             // Calculate net wire weight in pounds
-            const wireWeight = totalWeight - totalTareWeight;
+            const wireWeight = totalWeight - spoolWeight;
             
             // Get material density (lbs/cubic inch)
             const density = materialDensities[material];
