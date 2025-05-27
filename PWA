@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wire Length Calculator</title>
+    <meta name="theme-color" content="#00303F">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIldpcmUgTGVuZ3RoIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIldpcmUgQ2FsYyIsCiAgImRlc2NyaXB0aW9uIjogIkNhbGN1bGF0ZSB3aXJlIGxlbmd0aCBiYXNlZCBvbiB3ZWlnaHQgYW5kIG1hdGVyaWFsIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAzMDNGIiwKICAidGhlbWVfY29sb3IiOiAiIzAwMzAzRiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1USTRJaUJvWldsbmFIUTlJakV5T0NJZ2RtbGxkMEp2ZUQwaU1DQXdJREV5T0NBEVRJNE9DSWdabWxzYkQwaWJtOXVaU0lnZUcxc2JuTTlJbWgwZEhBNkx5OTNkM2N1ZHpNdWIzSm5Mekl3TURBdmMzWm5JajRLSUNBOGNtVmpkQ0IzYVdSMGFEMGlNVEk0SWlCb1pXbG5hSFE5SWpFeU9DSWdabWxzYkQwaUl6QXdNekEwUmlJZ2NuZzlJalFpTHo0S0lDQThjbVZqZENCNFBTSXhOaUlnZVQwaU1UWWlJSGRwWkhSb1BTSTVOR2dnYUdWcFoyaDBQU0k1TmlJZ1ptbHNiRDBpSXpFNU5FWTJNQ0lnY25nOUlqUWlMejRLSUNBOGNtVmpkQ0I0UFNJeU5DSWdlVDBpTkRnaUlIZHBaSFJvUFNJNE1DSWdhR1ZwWjJoMFBTSXpNaUlnWm1sc2JEMGlJekkyUXpOQlVTSWdjbmc5SWpRaUx6NEtJQ0E4Y21WamRDQjRQU0l6TWlJZ2VUMGlORGdpSUhkcFpIUm9QU0kyTkNJZ2FHVnBaMmgwUFNJek1pSWdabWxzYkQwaUl6VkZRakV4T0NJZ2NuZzlJalFpTHo0S0lDQThjbVZqZENCNFBTSTBNQ0lnZVQwaVE0Z2lJSGRwWkhSb1BTSTJOQ0lnYUdWcFoyaDBQU0l5TkNJZ1ptbHNiRDBpSTJabVptWm1aaUlnY25nOUlqRWlMejRLSUR3dmMzWm5QZ289PSIsCiAgICAgICJzaXplcyI6ICIxMjh4MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnZG1sbGQwSnZlRDBpTUNBd0lEVXhNaUExTVRJaUlHWnBiR3c5SW01dmJtVWlJSGh0Ykc1elBTSm9kSFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3TDNOMlp5SStDaUFnUEhKbFkzUWdkMmxrZEdnOUlqVXhNaUlnYUdWcFoyaDBQU0kxTVRJaUlHWnBiR3c5SWlNd01ETXdORVlpSUhKNFBTSXhOaUl2UGdvZ0lEeHlaV04wSUhnOUlqUTBJaUI1UFNJME5DSWdkMmxrZEdnOUlqUXlOQ0lnYUdWcFoyaDBQU0k0TURBaUlHWnBiR3c5SWlNeE9UUkdOakFpSUhKNFBTSXhOaUl2UGdvZ0lEeHlaV04wSUhnOUlqWTBJaUI1UFNJeE5EUWlJSGRwWkhSb1BTSXpNakFpSUdObFoyaDBQU0l4TWpnaUlHWnBiR3c5SWlNeVEyVXlRelZCVVNJZ2NuZzlJakUySWk4K0NpQWdQSEpsWTNRZ2VEMGlPREFpSUhrOUlqRTBOQ0lnZDJsa2RHZzlJakUySUNJZ2FHVnBaMmgwUFNJeE1qZ2lJR1pwYkd3OUlpTkZSVUl4TVRnaUlISjRQU0l4TmlJdlBnb2dJRHh5WldOMElIZzlJakV3TkNJZ2VUMGlNakF3SWlCM2FXUjBhRDBpTVRJNElpQm9aV2xuYUhROUlqWTBJaUJtYVd4c1BTSWpabVptWm1abUlpQnllRDBpTkNJdlBnb2dQQzl6ZG1jKyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0="">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #00303F;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background: #194F60;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 420px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 32px;
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #E6B618;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(230, 182, 24, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        select option {
+            background: #194F60;
+            color: #ffffff;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 16px;
+            background: #E6B618;
+            color: #00303F;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .calculate-btn:hover {
+            background: #d4a516;
+            transform: translateY(-1px);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.25rem;
+            color: #E6B618;
+            font-weight: 600;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wire-specs {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wire Length Calculator</h1>
+        
+        <form id="wireForm">
+            <div class="form-group">
+                <label for="totalWeight">Total Spool Weight (pounds):</label>
+                <input type="number" id="totalWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="spoolWeight">Spool Tare Weight (pounds):</label>
+                <input type="number" id="spoolWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="boxWeight">Box Weight (pounds):</label>
+                <input type="number" id="boxWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="bagWeight">Bag Weight (pounds):</label>
+                <input type="number" id="bagWeight" step="0.01" pattern="[0-9]*" inputmode="decimal" value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="material">Wire Material:</label>
+                <select id="material" required>
+                    <option value="">Select Material</option>
+                    <option value="304v">304V</option>
+                    <option value="nitinol">Nitinol</option>
+                    <option value="silver_plated_copper">Silver Plated Copper</option>
+                    <option value="nicra">NiCra</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="diameter">Wire Diameter (inches):</label>
+                <input type="number" id="diameter" step="0.0001" pattern="[0-9]*" inputmode="decimal" placeholder="e.g., 0.010" required>
+            </div>
+
+            <button type="button" class="calculate-btn" onclick="calculateWireLength()">Calculate Length</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Register service worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'wire-calc-v1';
+                    const urlsToCache = ['./', 'data:text/html,${encodeURIComponent(document.documentElement.outerHTML)}'];
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(() => console.log('Service Worker registered'))
+                    .catch((error) => console.log('Service Worker registration failed:', error));
+            });
+        }
+
+        // Material densities in pounds per cubic inch
+        const materialDensities = {
+            '304v': 0.286,
+            'nitinol': 0.233021,
+            'silver_plated_copper': 0.321815,
+            'nicra': 0.30476
+        };
+
+        function calculateWireLength() {
+            const totalWeight = parseFloat(document.getElementById('totalWeight').value);
+            const spoolWeight = parseFloat(document.getElementById('spoolWeight').value);
+            const boxWeight = parseFloat(document.getElementById('boxWeight').value) || 0;
+            const bagWeight = parseFloat(document.getElementById('bagWeight').value) || 0;
+            const material = document.getElementById('material').value;
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            
+            const resultDiv = document.getElementById('result');
+            
+            // Clear previous result
+            resultDiv.innerHTML = '';
+            
+            // Validate inputs
+            if (!totalWeight || !spoolWeight || !material || !diameter) {
+                resultDiv.innerHTML = 'Please fill in all required fields';
+                return;
+            }
+            
+            const totalTareWeight = spoolWeight + boxWeight + bagWeight;
+            
+            if (totalWeight <= totalTareWeight) {
+                resultDiv.innerHTML = 'Total weight must be greater than combined tare weights';
+                return;
+            }
+            
+            if (diameter <= 0) {
+                resultDiv.innerHTML = 'Diameter must be greater than 0';
+                return;
+            }
+            
+            // Calculate net wire weight in pounds
+            const wireWeight = totalWeight - totalTareWeight;
+            
+            // Get material density (lbs/cubic inch)
+            const density = materialDensities[material];
+            
+            // Calculate wire cross-sectional area (square inches)
+            const radius = diameter / 2;
+            const crossSectionalArea = Math.PI * radius * radius;
+            
+            // Calculate volume of wire (cubic inches)
+            const wireVolume = wireWeight / density;
+            
+            // Calculate length (inches)
+            const lengthInches = wireVolume / crossSectionalArea;
+            
+            // Convert to feet and round to nearest whole number
+            const lengthFeet = Math.round(lengthInches / 12);
+            
+            // Display result
+            resultDiv.innerHTML = lengthFeet + ' feet';
+        }
+    </script>
+</body>
+</html>
